@@ -83,6 +83,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     AudioFX
 
+# CM Hardware Abstraction Framework
+PRODUCT_PACKAGES += \
+    org.cyanogenmod.hardware \
+    org.cyanogenmod.hardware.xml
+
 # Extra Optional packages
 PRODUCT_PACKAGES += \
     SlimCenter \
@@ -101,7 +106,9 @@ PRODUCT_PACKAGES += \
     tune2fs \
     mount.exfat \
     fsck.exfat \
-    mkfs.exfat
+    mkfs.exfat \
+    ntfsfix \
+    ntfs-3g
 
 # Stagefright FFMPEG plugin
 PRODUCT_PACKAGES += \
@@ -161,7 +168,7 @@ endif
 # SlimLP first version.
 PRODUCT_VERSION_MAJOR = 5.1.1
 PRODUCT_VERSION_MINOR = alpha
-PRODUCT_VERSION_MAINTENANCE = 0.3
+PRODUCT_VERSION_MAINTENANCE = 0.4
 ifdef SLIM_BUILD_EXTRA
     SLIM_POSTFIX := -$(SLIM_BUILD_EXTRA)
 endif
@@ -179,6 +186,11 @@ endif
 
 ifneq ($(INCLUDE_SLIMIRC),)
     PRODUCT_PACKAGES += SlimIRC
+endif
+
+# Chromium Prebuilt
+ifeq ($(PRODUCT_PREBUILT_WEBVIEWCHROMIUM),yes)
+-include prebuilts/chromium/$(TARGET_DEVICE)/chromium_prebuilt.mk
 endif
 
 # Set all versions
